@@ -1,7 +1,8 @@
-package com.example.stakanchik
+package com.example.stakanchik.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.stakanchik.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
