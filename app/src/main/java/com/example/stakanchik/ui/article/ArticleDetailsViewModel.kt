@@ -1,4 +1,4 @@
-package com.example.stakanchik.ui.main
+package com.example.stakanchik.ui.article
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,20 +11,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class ArticleDetailsViewModel @Inject constructor(
     private val getArticleUseCase: GetArticleUseCase
 ): BaseViewModel() {
 
-    private val _article = MutableLiveData<List<Article>>()
-    val article: LiveData<List<Article>>
-    get() = _article
+    private val _articles = MutableLiveData<List<Article>>()
+    val articles: LiveData<List<Article>>
+        get() = _articles
 
     fun getArticle() {
         disposable.add(
             getArticleUseCase()
                 .subscribe({
                     Log.d("Article Success", it.toString())
-                    _article.value = it
+                    _articles.value = it
                 }, {
                     Log.d("Article Error", it.toString())
                     _event.value = BaseEvent.ShowToast(it.message ?: "")

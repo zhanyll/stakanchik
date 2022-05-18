@@ -1,12 +1,44 @@
 package com.example.stakanchik.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.example.stakanchik.R
+import com.example.stakanchik.databinding.ActivityMainBinding
+import com.example.stakanchik.ui.OnClicked
+import com.example.stakanchik.ui.article.ArticleDetailsFragment
+import com.example.stakanchik.ui.base.BaseActivity
+import com.example.stakanchik.ui.base.BaseEvent
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
+    MainViewModel::class.java,
+    { ActivityMainBinding.inflate(it) }
+), OnClicked {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        if(savedInstanceState == null){
+            onMain(MainFragment(),false)
+        }
+    }
+
+    override fun onMain(fragment: Fragment, addToBackStack: Boolean?) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, fragment).apply {
+                if(addToBackStack == true){
+                    addToBackStack("")
+                }
+            }
+            .commit()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.getStringExtra("CHARACTER_ID")?.let {
+            onMain(ArticleDetailsFragment.newInstance(it.toLong()))
+        }
     }
 }

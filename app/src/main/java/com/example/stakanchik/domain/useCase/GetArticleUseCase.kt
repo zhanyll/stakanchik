@@ -1,5 +1,6 @@
 package com.example.stakanchik.domain.useCase
 
+import android.util.Log
 import com.example.stakanchik.data.repo.ArticlesRepo
 import com.example.stakanchik.domain.models.Article
 import com.example.stakanchik.extentions.toArticle
@@ -16,6 +17,7 @@ class GetArticleUseCase @Inject constructor(
         return articlesRepo.getArticleFromApi()
             .subscribeOn(Schedulers.io())
             .map {
+                Log.d("Article", it.toString())
                 articlesRepo.saveArticlesToDataBase(it.map { it.toArticleEntity() })
                 it.map { it.toArticle() }
             }
