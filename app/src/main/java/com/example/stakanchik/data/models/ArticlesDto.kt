@@ -10,5 +10,6 @@ data class ArticlesDto(
     val author: String,
     val genre: String, ///need to fix
     val is_marked: Boolean,
-    val is_read: Boolean
+    val is_read: Boolean,
+    val image: String
 )
