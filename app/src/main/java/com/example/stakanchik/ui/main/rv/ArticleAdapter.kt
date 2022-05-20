@@ -1,11 +1,8 @@
 package com.example.stakanchik.ui.main.rv
 
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stakanchik.data.models.ArticlesEntity
-import com.example.stakanchik.ui.base.BaseEvent
-
 
 class ArticleAdapter(
     private val listener: Listener

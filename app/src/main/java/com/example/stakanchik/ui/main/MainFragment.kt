@@ -20,24 +20,21 @@ class MainFragment: BaseFragment<MainViewModel, FragmentMainBinding> (
     { FragmentMainBinding.inflate(it) }
 ), ArticleAdapter.Listener, OnClicked {
 
-    private lateinit var fragmentListener: OnClicked
+//    private lateinit var fragmentListener: OnClicked
     private val articleAdapter: ArticleAdapter = ArticleAdapter(this)
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeToLiveData()
 
-        binding.run{
-            bottomNav.setOnItemSelectedListener {
-                onItemSelected(it)
-            }
-        }
+        vm.getArticle()
     }
 
     private fun subscribeToLiveData(){
-        vm.article.observe(
-            requireActivity(),
-        ) {
+        vm.article.observe(requireActivity()) {
+            articleAdapter.setNewItems(it)
             showToast(it.toString())
         }
 
@@ -48,47 +45,15 @@ class MainFragment: BaseFragment<MainViewModel, FragmentMainBinding> (
         }
     }
 
-    private fun onItemSelected(it: MenuItem) = when (it.itemId) {
-        R.id.menu_home -> {
-            fragmentListener.onMain(MainFragment())
-            true
-        }
-        R.id.menu_popular -> {
-            fragmentListener.onMain(PopularArticlesFragment())
-            true
-        }
-        R.id.menu_starred -> {
-            setContent("Search")
-            true
-        }
-        R.id.menu_user -> {
-            setContent("Profile")
-            true
-        }
-        else -> false
-    }
-
-    private fun setContent(content: String) {
-        setTitle(content)
-    }
-
-//    private fun setupViews() {
-//        binding.run {
-//            button.setOnClickListener {
-//                Log.d("get", "success")
-//                vm.getArticle()
-//            }
-//        }
-//    }
-
-    override fun onClick(index: Int) {
-        vm.getArtcileByIndex(index)?.let {
-            fragmentListener.onMain(ArticleDetailsFragment.newInstance(it.article_id))
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        vm.clearEvents()
+    }
+
+
+    override fun onClick(index: Int) {
+        vm.getArticleByIndex(index)?.let {
+//            fragmentListener.onMain(ArticleDetailsFragment.newInstance(it.article_id))
+        }
     }
 }

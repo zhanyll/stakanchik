@@ -1,5 +1,6 @@
 package com.example.stakanchik.ui.base
 
+import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,9 @@ open class BaseViewModel @Inject constructor(): ViewModel() {
     protected val disposable by lazy {
         CompositeDisposable()
     }
+
+    @Inject
+    lateinit var  resources: Resources
 
     protected val _event by lazy {
         MutableLiveData<BaseEvent>()

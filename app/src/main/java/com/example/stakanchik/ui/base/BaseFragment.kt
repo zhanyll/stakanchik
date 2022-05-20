@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 
-open class BaseFragment<viewModel: ViewModel, viewBinding: ViewBinding> (
+open class BaseFragment<viewModel: BaseViewModel, viewBinding: ViewBinding> (
     private val vmClass: Class<viewModel>,
     inline val bindingCreator: (inflater: LayoutInflater) -> viewBinding
 ): Fragment() {

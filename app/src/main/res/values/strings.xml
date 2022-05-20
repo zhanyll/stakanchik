@@ -4,4 +4,6 @@
     <string name="popular">Popular</string>
     <string name="favorites">Favorites</string>
     <string name="profile">Profile</string>
+    <string name="no_internet">No Internet Connection!</string>
+    <string name="unknown_error">Unknown Error!</string>
 </resources>
