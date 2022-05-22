@@ -7,7 +7,7 @@ import com.example.stakanchik.ui.base.BaseEvent
 
 class ArticleAdapter(
     private val listener: Listener
-):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+):RecyclerView.Adapter<HorizontalArticleViewHolder>() {
 
     private val items = arrayListOf<Any>()
 
@@ -17,20 +17,23 @@ class ArticleAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
-            ViewType.VERTICAL -> ArticleViewHolder.create(parent, listener)
-            ViewType.HORIZONTAL -> HorizontalArticleViewHolder.create(parent, listener)
-            else -> ArticleViewHolder.create(parent, listener)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalArticleViewHolder {
+//        return when(viewType) {
+//            ViewType.VERTICAL -> ArticleViewHolder.create(parent, listener)
+//            ViewType.HORIZONTAL -> HorizontalArticleViewHolder.create(parent, listener)
+//            else -> ArticleViewHolder.create(parent, listener)
+//        }
+        return HorizontalArticleViewHolder.create(parent, listener)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder) {
-            is ArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
-            is HorizontalArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
-            else -> {}
-        }
+    override fun onBindViewHolder(holder: HorizontalArticleViewHolder, position: Int) {
+//        when(holder) {
+//            is ArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
+//            is HorizontalArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
+//            else -> {}
+//        }
+        val item = items[position]
+        holder.bind(item as ArticlesEntity)
     }
 
     override fun getItemCount(): Int {

@@ -21,7 +21,7 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
         super.onCreate(savedInstanceState)
 
         if(savedInstanceState == null){
-//            onMain(MainFragment(),false)
+            onClickOpenFragment(MainFragment(),false)
             binding.bottomNav.selectedItemId = R.id.menu_home
         }
 
@@ -56,7 +56,6 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
             true
         }
         R.id.menu_popular -> {
-//            fragmentListener.onMain(PopularArticlesFragment())
             onClickOpenFragment(PopularArticlesFragment())
             true
         }

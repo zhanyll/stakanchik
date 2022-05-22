@@ -6,14 +6,11 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.stakanchik.databinding.FragmentMainBinding
 import com.example.stakanchik.ui.OnClicked
 import com.example.stakanchik.ui.base.BaseFragment
 import com.example.stakanchik.ui.base.Event
 import com.example.stakanchik.ui.main.rv.ArticleAdapter
-import com.example.stakanchik.ui.main.rv.ArticleViewHolder
-import com.example.stakanchik.ui.main.rv.HorizontalArticleViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

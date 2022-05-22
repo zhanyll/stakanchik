@@ -6,9 +6,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
-    android:layout_margin="10dp"
+    android:layout_margin="7dp"
     app:cardElevation="8dp"
-    android:layout_gravity="center"
     android:layout_marginVertical="4dp"
     android:layout_marginHorizontal="8dp"
     app:cardCornerRadius="8dp">
@@ -19,26 +18,28 @@
 
         <ImageView
             android:id="@+id/articleImage"
-            android:layout_width="370dp"
-            android:layout_height="200dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@+id/articleTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/articleTitle"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="#80000000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/articleImage"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@id/articleImage"
-            app:layout_constraintTop_toBottomOf="@+id/articleImage" />
+            app:layout_constraintLeft_toLeftOf="@id/articleImage"
+            app:layout_constraintRight_toRightOf="@id/articleImage"
+            app:layout_constraintTop_toTopOf="@+id/articleImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -7,7 +7,6 @@ import androidx.lifecycle.Transformations
 import com.example.stakanchik.R
 import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.data.repo.ArticlesRepo
-import com.example.stakanchik.domain.models.Article
 import com.example.stakanchik.domain.useCase.GetArticleByIdUseCase
 import com.example.stakanchik.domain.useCase.GetArticlesAsLiveDataUseCase
 import com.example.stakanchik.domain.useCase.GetArticleUseCase
