@@ -32,7 +32,7 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
         }
     }
 
-    override fun onMain(fragment: Fragment, addToBackStack: Boolean?) {
+    override fun onClickOpenFragment(fragment: Fragment, addToBackStack: Boolean?) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment).apply {
@@ -46,18 +46,18 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.getStringExtra("CHARACTER_ID")?.let {
-            onMain(ArticleDetailsFragment.newInstance(it.toLong()))
+            onClickOpenFragment(ArticleDetailsFragment.newInstance(it.toLong()))
         }
     }
 
     private fun onItemSelected(it: MenuItem) = when (it.itemId) {
         R.id.menu_home -> {
-            onMain(MainFragment())
+            onClickOpenFragment(MainFragment())
             true
         }
         R.id.menu_popular -> {
 //            fragmentListener.onMain(PopularArticlesFragment())
-            onMain(PopularArticlesFragment())
+            onClickOpenFragment(PopularArticlesFragment())
             true
         }
         R.id.menu_starred -> {

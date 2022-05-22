@@ -6,7 +6,7 @@ sealed class BaseEvent {
     class ShowToast(val message: String): BaseEvent()
 }
 
-sealed class AuthEvent: BaseEvent() {
+sealed class Event: BaseEvent() {
     object OnAuthSuccess: BaseEvent()
     class ShowTimer(val time: Long): BaseEvent()
     class ShowToast(@StringRes val resId: Int): BaseEvent()

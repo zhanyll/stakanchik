@@ -15,7 +15,8 @@ fun ArticlesDto.toArticleEntity(): ArticlesEntity {
         genre,
         is_marked,
         is_read,
-        image
+        image,
+        views
     )
 }
 
@@ -29,6 +30,7 @@ fun ArticlesDto.toArticle(): Article {
         genre,
         is_marked,
         is_read,
-        image
+        image,
+        views
     )
 }

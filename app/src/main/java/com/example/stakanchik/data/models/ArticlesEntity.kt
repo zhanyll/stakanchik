@@ -15,5 +15,6 @@ data class ArticlesEntity(
     val genre: String, ///need to fix
     val is_marked: Boolean,
     val is_read: Boolean,
-    val image: String
+    val image: String,
+    val views: Int
 )

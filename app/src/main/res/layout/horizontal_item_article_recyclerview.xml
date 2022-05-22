@@ -1,43 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:id="@+id/relativeLayout"
+    app:cardBackgroundColor="@color/white"
+    android:layout_margin="10dp"
+    app:cardElevation="8dp"
+    android:layout_gravity="center"
     android:layout_marginVertical="4dp"
-    android:gravity="center"
-    android:background="@color/white">
+    android:layout_marginHorizontal="8dp"
+    app:cardCornerRadius="8dp">
 
-
-    <ImageView
-        android:id="@+id/articleImage"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"/>
+        android:layout_height="240dp">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/articleImage"
-        android:layout_alignTop="@id/articleImage"
-        android:layout_alignRight="@id/articleImage"
-        android:layout_alignBottom="@id/articleImage"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="-2dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="-1dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="Hello"
-        android:textColor="#000000"
-        android:textSize="24sp"/>
+        <ImageView
+            android:id="@+id/articleImage"
+            android:layout_width="370dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/articleTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/articleTitle"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/articleImage"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@id/articleImage"
+            app:layout_constraintTop_toBottomOf="@+id/articleImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="240dp"-->
+<!--    android:id="@+id/relativeLayout"-->
+<!--    android:layout_marginVertical="4dp"-->
+<!--    android:gravity="center"-->
+<!--    android:background="@color/white">-->
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/articleImage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:srcCompat="@tools:sample/avatars"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignLeft="@id/articleImage"-->
+<!--        android:layout_alignTop="@id/articleImage"-->
+<!--        android:layout_alignRight="@id/articleImage"-->
+<!--        android:layout_alignBottom="@id/articleImage"-->
+<!--        android:layout_marginStart="1dp"-->
+<!--        android:layout_marginLeft="3dp"-->
+<!--        android:layout_marginTop="-2dp"-->
+<!--        android:layout_marginEnd="1dp"-->
+<!--        android:layout_marginRight="-1dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Hello"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="24sp"/>-->
+
+<!--</RelativeLayout>-->

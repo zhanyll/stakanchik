@@ -15,16 +15,27 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingClass">
 
+<!--        <GridView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:id="@+id/gridView"-->
+<!--            android:stretchMode="columnWidth"-->
+<!--            android:verticalSpacing="10dp"-->
+<!--            android:horizontalSpacing="10dp"-->
+<!--            android:gravity="center"-->
+<!--            android:numColumns="auto_fit"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"/>-->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

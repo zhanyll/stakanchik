@@ -3,6 +3,7 @@ package com.example.stakanchik.ui.main.rv
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stakanchik.data.models.ArticlesEntity
+import com.example.stakanchik.ui.base.BaseEvent
 
 class ArticleAdapter(
     private val listener: Listener
@@ -19,7 +20,6 @@ class ArticleAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             ViewType.VERTICAL -> ArticleViewHolder.create(parent, listener)
-            ViewType.VERTICAL1 -> ArticleViewHolder.create(parent, listener)
             ViewType.HORIZONTAL -> HorizontalArticleViewHolder.create(parent, listener)
             else -> ArticleViewHolder.create(parent, listener)
         }
@@ -37,26 +37,29 @@ class ArticleAdapter(
         return items.count()
     }
 
-//    override fun getItemViewType(position: Int): Int {
-//        return when (val item = items[position]){
-//            is CharacterEntity -> {
-//                return when(item.species){
-//                    SPECIES.HUMAN -> ViewType.HUMAN
-//                    SPECIES.ALIEN -> ViewType.ALIEN
-//                }
-//            }
-//            else -> ViewType.ADVERT
-//        }
-//    }
+    override fun getItemViewType(position: Int): Int {
+        return when (items[position]){
+            is ArticlesEntity -> {
+                return if (position == 0) {
+                    ViewType.HORIZONTAL
+                } else {
+                    when ((position - 1) % 3) {
+                        0 -> ViewType.HORIZONTAL
+                        1 -> ViewType.VERTICAL
+                        else -> 0
+                    }
+                }
+            }
+            else -> ViewType.VERTICAL
+        }
+    }
 
     interface Listener {
         fun onClick(index: Int)
     }
 
     object ViewType{
-        const val  VERTICAL1 = 3
-        const val  VERTICAL = 2
-        const val  HORIZONTAL = 1
-
+        const val VERTICAL = 2
+        const val HORIZONTAL = 1
     }
 }

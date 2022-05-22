@@ -5,16 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.stakanchik.R
-import com.example.stakanchik.Stakanchik
 import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.data.repo.ArticlesRepo
 import com.example.stakanchik.domain.models.Article
+import com.example.stakanchik.domain.useCase.GetArticleByIdUseCase
 import com.example.stakanchik.domain.useCase.GetArticlesAsLiveDataUseCase
 import com.example.stakanchik.domain.useCase.GetArticleUseCase
-import com.example.stakanchik.ui.base.AuthEvent
 import com.example.stakanchik.ui.base.BaseEvent
 import com.example.stakanchik.ui.base.BaseViewModel
-import dagger.hilt.android.internal.Contexts.getApplication
+import com.example.stakanchik.ui.base.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -23,12 +22,15 @@ import javax.inject.Inject
 class MainArticlesViewModel @Inject constructor(
     private val getArticleUseCase: GetArticleUseCase,
     private val getArticlesAsLiveDataUseCase: GetArticlesAsLiveDataUseCase,
+    private val getArticleByIdUseCase: GetArticleByIdUseCase,
     private val articlesRepo: ArticlesRepo
 ): BaseViewModel() {
 
-    private val _article = MutableLiveData<List<Article>>()
-    val article: LiveData<List<Article>>
+    private val _article = MutableLiveData<List<ArticlesEntity>>()
+    val article: LiveData<List<ArticlesEntity>>
     get() = _article
+
+
 
     val articlesLiveData: LiveData<List<Any>> =
         Transformations.map(getArticlesAsLiveDataUseCase()){
@@ -40,11 +42,10 @@ class MainArticlesViewModel @Inject constructor(
             return@map newList
         }
 
+    init {
+        loadArticles()
+    }
 
-//    init {
-//        getArticle()
-////        loadCharacters()
-//    }
     fun getArticle() {
         disposable.add(
             getArticleUseCase()
@@ -56,7 +57,6 @@ class MainArticlesViewModel @Inject constructor(
                     }catch (e: Throwable){
                         val a = e
                     }
-
                 }, {
                     Log.d("Article Error", it.toString())
                     _event.value = BaseEvent.ShowToast(it.message ?: "")
@@ -64,13 +64,23 @@ class MainArticlesViewModel @Inject constructor(
         )
     }
 
-    fun loadCharacters() {
-        _event.value = AuthEvent.ShowLoading
+    fun getArticleById(id: Long) {
         disposable.add(
-            getArticleUseCase()
-                .doOnTerminate { _event.value = AuthEvent.StopLoading }
+            getArticleByIdUseCase(id)
                 .subscribe({
 
+                }, {
+
+                })
+        )
+    }
+
+    fun loadArticles() {
+        _event.value = Event.ShowLoading
+        disposable.add(
+            getArticleUseCase()
+                .doOnTerminate { _event.value = Event.StopLoading }
+                .subscribe({
 
                 }, {
                     handleError(it)
@@ -80,11 +90,6 @@ class MainArticlesViewModel @Inject constructor(
 
     fun getArticleByIndex(index: Int): ArticlesEntity {
         return articlesLiveData.value?.get(index) as ArticlesEntity
-    }
-
-
-    override fun onCleared() {
-        super.onCleared()
     }
 
     private fun handleError(it: Throwable) {

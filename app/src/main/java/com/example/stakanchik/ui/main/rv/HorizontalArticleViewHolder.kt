@@ -15,6 +15,7 @@ class HorizontalArticleViewHolder(
     fun bind(item: ArticlesEntity) {
         binding.run {
             Glide.with(itemView.context).load(item.image).into(articleImage)
+            articleTitle.text = item.topic
         }
     }
 
