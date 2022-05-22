@@ -9,7 +9,6 @@ import com.example.stakanchik.databinding.ActivityMainBinding
 import com.example.stakanchik.ui.OnClicked
 import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseActivity
-import com.example.stakanchik.ui.base.BaseEvent
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
