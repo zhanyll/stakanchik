@@ -10,10 +10,9 @@ class GetArticleByIdUseCase @Inject constructor(
     private val articlesRepo: ArticlesRepo
 ) {
 
-    operator fun invoke(id: Int): Single<ArticlesEntity> {
-        return articlesRepo.getArticleById(id)
+    operator fun invoke(objectId: String): Single<ArticlesEntity> {
+        return articlesRepo.getArticleById(objectId)
             .map {
-                Thread.sleep(2000)
                 it
             }
             .observeOn(AndroidSchedulers.mainThread())

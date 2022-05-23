@@ -63,9 +63,9 @@ class MainArticlesViewModel @Inject constructor(
         )
     }
 
-    fun getArticleById(id: Int) {
+    fun getArticleById(objectId: String) {
         disposable.add(
-            getArticleByIdUseCase(id)
+            getArticleByIdUseCase(objectId)
                 .subscribe({
 
                 }, {

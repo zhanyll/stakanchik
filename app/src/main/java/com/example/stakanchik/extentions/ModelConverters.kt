@@ -7,7 +7,7 @@ import com.example.stakanchik.domain.models.Article
 
 fun ArticlesDto.toArticleEntity(): ArticlesEntity {
     return ArticlesEntity(
-        article_id,
+        objectId,
         topic,
         text,
         publish_date,
@@ -22,7 +22,7 @@ fun ArticlesDto.toArticleEntity(): ArticlesEntity {
 
 fun ArticlesDto.toArticle(): Article {
     return Article(
-        article_id,
+        objectId,
         topic,
         text,
         publish_date,

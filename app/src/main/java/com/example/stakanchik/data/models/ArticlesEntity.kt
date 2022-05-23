@@ -6,8 +6,8 @@ import java.util.*
 
 @Entity
 data class ArticlesEntity(
-    @PrimaryKey(autoGenerate = true)
-    val article_id: Int,
+    @PrimaryKey()
+    val objectId: String,
     val topic: String,
     val text: String,
     val publish_date: String,

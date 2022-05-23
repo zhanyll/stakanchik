@@ -46,7 +46,7 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.getStringExtra("CHARACTER_ID")?.let {
-            onClickOpenFragment(ArticleDetailsFragment.newInstance(it.toLong()))
+            onClickOpenFragment(ArticleDetailsFragment.newInstance(it))
         }
     }
 

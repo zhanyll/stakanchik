@@ -61,9 +61,9 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
         }
     }
 
-    override fun onClick(index: Int) {
-        vm.getArticleById(id).let {
-            fragmentListener.onClickOpenFragment(ArticleDetailsFragment.newInstance(id))
+    override fun onClick(objectId: String) {
+        vm.getArticleById(objectId).let {
+            fragmentListener.onClickOpenFragment(ArticleDetailsFragment.newInstance(objectId))
         }
     }
 }

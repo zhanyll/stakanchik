@@ -3,6 +3,7 @@ package com.example.stakanchik.ui.article
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
+import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.databinding.FragmentArticleDetailsBinding
 import com.example.stakanchik.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,23 +16,34 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpFragmentViews()
+        parseArguments()
+        subscribeToLiveData()
     }
 
-    private fun setUpFragmentViews() {
+    private fun parseArguments() {
+        arguments?.getString(String::class.java.canonicalName)?.let {
+            vm.getArticleById(it)
+        }
+    }
+
+    private fun setUpFragmentViews(article: ArticlesEntity) {
         binding.run {
-            vm.getArticleById(id)
-            val article = vm.article
-            articleTitle.text = article.value?.topic
-            articleText.text = article.value?.text
-            articleAuthor.text = article.value?.author
-            view?.let { Glide.with(it).load(article.value?.image).into(articleImage) }
+            articleTitle.text = article.topic
+            articleText.text = article.text
+            articleAuthor.text = article.author
+            view?.let { Glide.with(it).load(article.image).into(articleImage) }
+        }
+    }
+
+    private fun subscribeToLiveData() {
+        vm.article.observe(viewLifecycleOwner) {
+            it?.let { setUpFragmentViews(it) }
         }
     }
 
     companion object {
-        fun newInstance(id: Int): ArticleDetailsFragment {
-            val args = Bundle().apply { putInt(Int::class.java.canonicalName, id) }
+        fun newInstance(objectId: String): ArticleDetailsFragment {
+            val args = Bundle().apply { putString(String::class.java.canonicalName, objectId) }
             return ArticleDetailsFragment().apply { arguments = args }
         }
     }

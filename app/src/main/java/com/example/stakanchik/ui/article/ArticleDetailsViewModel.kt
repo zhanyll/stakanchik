@@ -21,9 +21,9 @@ class ArticleDetailsViewModel @Inject constructor(
     val article: LiveData<ArticlesEntity>
         get() = _article
 
-    fun getArticleById(id: Int) {
+    fun getArticleById(objectId: String) {
         disposable.add(
-            getArticleByIdUseCase(id)
+            getArticleByIdUseCase(objectId)
                 .subscribe({
                     Log.d("Article Success", it.toString())
                     _article.value = it

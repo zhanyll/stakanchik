@@ -31,6 +31,6 @@ class ArticleAdapter(
     }
 
     interface Listener {
-        fun onClick(index: Int)
+        fun onClick(objectId: String)
     }
 }
