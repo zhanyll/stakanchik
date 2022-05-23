@@ -17,7 +17,7 @@ class ArticlesRepo @Inject constructor(
 
     fun getArticlesAsLive() = articlesDao.getAll()
 
-    fun getArticleById(id: Long): Single<ArticlesEntity> {
+    fun getArticleById(id: Int): Single<ArticlesEntity> {
         return articlesDao.getArticleByID(id)
             .subscribeOn(Schedulers.io())
     }

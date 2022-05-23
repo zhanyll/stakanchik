@@ -10,7 +10,7 @@ class GetArticleByIdUseCase @Inject constructor(
     private val articlesRepo: ArticlesRepo
 ) {
 
-    operator fun invoke(id: Long): Single<ArticlesEntity> {
+    operator fun invoke(id: Int): Single<ArticlesEntity> {
         return articlesRepo.getArticleById(id)
             .map {
                 Thread.sleep(2000)

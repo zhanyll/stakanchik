@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stakanchik.databinding.FragmentMainBinding
 import com.example.stakanchik.ui.OnClicked
+import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseFragment
 import com.example.stakanchik.ui.base.Event
 import com.example.stakanchik.ui.main.rv.ArticleAdapter
@@ -32,8 +33,6 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
         setupViews()
         subscribeToLiveData()
         vm.getArticle()
-
-
     }
 
     private fun setupViews() {
@@ -63,8 +62,8 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
     }
 
     override fun onClick(index: Int) {
-//        vm.getArticleByIndex(index).let {
-//            fragmentListener.onClickOpenFragment(ArticleDetailsFragment.newInstance(it.article_id))
-//        }
+        vm.getArticleById(id).let {
+            fragmentListener.onClickOpenFragment(ArticleDetailsFragment.newInstance(id))
+        }
     }
 }

@@ -19,6 +19,6 @@ interface ArticlesDao {
     fun getAll(): LiveData<List<ArticlesEntity>>
 
     @Query("SELECT * FROM ArticlesEntity WHERE article_id = :article_id")
-    fun getArticleByID(article_id: Long?): Single<ArticlesEntity>
+    fun getArticleByID(article_id: Int?): Single<ArticlesEntity>
 
 }

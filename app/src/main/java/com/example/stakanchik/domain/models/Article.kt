@@ -1,7 +1,7 @@
 package com.example.stakanchik.domain.models
 
 data class Article(
-    val article_id: Long,
+    val article_id: Int,
     val topic: String,
     val text: String,
     val publish_date: String,
