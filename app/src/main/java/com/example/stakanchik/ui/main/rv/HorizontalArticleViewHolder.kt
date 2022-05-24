@@ -27,7 +27,7 @@ class HorizontalArticleViewHolder(
 
             return HorizontalArticleViewHolder(binding).apply {
                 itemView.setOnClickListener {
-                    listener.onClick(adapterPosition.toString())
+                    listener.onClick(adapterPosition)
                 }
             }
         }

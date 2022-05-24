@@ -15,6 +15,7 @@ class ArticleAdapter(
         this.items.clear()
         this.items.addAll(list)
         notifyDataSetChanged()
+//        notifyItemChanged(itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalArticleViewHolder {
@@ -31,6 +32,6 @@ class ArticleAdapter(
     }
 
     interface Listener {
-        fun onClick(objectId: String)
+        fun onClick(index: Int)
     }
 }

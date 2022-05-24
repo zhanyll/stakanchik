@@ -2,6 +2,7 @@ package com.example.stakanchik.ui.article
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.NestedScrollView
 import com.bumptech.glide.Glide
 import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.databinding.FragmentArticleDetailsBinding
@@ -26,18 +27,19 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
         }
     }
 
+    private fun subscribeToLiveData() {
+        vm.article.observe(viewLifecycleOwner) {
+            it?.let { setUpFragmentViews(it) }
+        }
+    }
+
     private fun setUpFragmentViews(article: ArticlesEntity) {
         binding.run {
             articleTitle.text = article.topic
             articleText.text = article.text
             articleAuthor.text = article.author
             view?.let { Glide.with(it).load(article.image).into(articleImage) }
-        }
-    }
-
-    private fun subscribeToLiveData() {
-        vm.article.observe(viewLifecycleOwner) {
-            it?.let { setUpFragmentViews(it) }
+//            articleText.movementMethod
         }
     }
 
