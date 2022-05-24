@@ -22,7 +22,6 @@ class MainArticlesViewModel @Inject constructor(
     private val getArticleUseCase: GetArticleUseCase,
     private val getArticlesAsLiveDataUseCase: GetArticlesAsLiveDataUseCase,
     private val getArticleByIdUseCase: GetArticleByIdUseCase,
-    private val articlesRepo: ArticlesRepo
 ): BaseViewModel() {
 
     private val _article = MutableLiveData<List<ArticlesEntity>>()
@@ -63,16 +62,16 @@ class MainArticlesViewModel @Inject constructor(
         )
     }
 
-    fun getArticleById(objectId: String) {
-        disposable.add(
-            getArticleByIdUseCase(objectId)
-                .subscribe({
-
-                }, {
-
-                })
-        )
-    }
+//    fun getArticleById(objectId: String) {
+//        disposable.add(
+//            getArticleByIdUseCase(objectId)
+//                .subscribe({
+//
+//                }, {
+//
+//                })
+//        )
+//    }
 
     fun loadArticles() {
         _event.value = Event.ShowLoading
@@ -87,9 +86,9 @@ class MainArticlesViewModel @Inject constructor(
         )
     }
 
-    fun getArticleByIndex(index: Int): ArticlesEntity {
-        return articlesLiveData.value?.get(index) as ArticlesEntity
-    }
+//    fun getArticleByIndex(index: Int): ArticlesEntity {
+//        return articlesLiveData.value?.get(index) as ArticlesEntity
+//    }
 
     private fun handleError(it: Throwable) {
         _event.value = when (it) {
