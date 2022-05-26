@@ -13,6 +13,10 @@ class ArticlesRepo @Inject constructor(
 ) {
     fun getArticleFromApi() = articlesApi.getArticles()
 
+    fun getFavouriteArticlesFromApi() = articlesApi.getFavouriteArticles(true)
+
+//    fun getPopularArticlesFromApi() = articlesApi.getPopularArticles()
+
     fun saveArticlesToDataBase(articles: List<ArticlesEntity>) = articlesDao.insertArticles(articles)
 
     fun getArticlesAsLive() = articlesDao.getAll()

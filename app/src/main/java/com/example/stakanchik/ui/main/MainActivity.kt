@@ -9,6 +9,8 @@ import com.example.stakanchik.databinding.ActivityMainBinding
 import com.example.stakanchik.ui.OnClicked
 import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseActivity
+import com.example.stakanchik.ui.favourite.FavouriteArticlesFragment
+import com.example.stakanchik.ui.favourite.FavouriteArticlesViewModel
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,7 +62,7 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
             true
         }
         R.id.menu_starred -> {
-            //
+            onClickOpenFragment(FavouriteArticlesFragment())
             true
         }
         R.id.menu_user -> {

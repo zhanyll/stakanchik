@@ -9,6 +9,16 @@ interface ArticlesApi {
     @GET("articles")
     fun getArticles(): Single<List<ArticlesDto>>
 
+    @GET("article")
+    fun getFavouriteArticles(
+        @Query("is_marked") is_marked: Boolean
+    ): Single<List<ArticlesDto>>
+
+    @GET("article")
+    fun getPopularArticles(
+        @Query("views") views: Int
+    ): Single<List<ArticlesDto>>
+
     @GET("articles")
     fun getArticleByIdFromApi(
         @Query("objectId") objectId: String
