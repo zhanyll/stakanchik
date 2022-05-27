@@ -10,4 +10,5 @@
     <string name="surname">Surname</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="app_name_rus">Стаканчик</string>
 </resources>
