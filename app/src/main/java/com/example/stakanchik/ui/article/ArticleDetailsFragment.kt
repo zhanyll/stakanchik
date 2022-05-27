@@ -1,5 +1,6 @@
 package com.example.stakanchik.ui.article
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.NestedScrollView
@@ -39,7 +40,6 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
             articleText.text = article.text
             articleAuthor.text = article.author
             view?.let { Glide.with(it).load(article.image).into(articleImage) }
-//            articleText.movementMethod
         }
     }
 

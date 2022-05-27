@@ -7,7 +7,7 @@ import com.example.stakanchik.ui.base.BaseEvent
 
 class ArticleAdapter(
     private val listener: Listener
-):RecyclerView.Adapter<HorizontalArticleViewHolder>() {
+):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = arrayListOf<Any>()
 
@@ -18,20 +18,43 @@ class ArticleAdapter(
 //        notifyItemChanged(itemCount)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HorizontalArticleViewHolder {
-        return HorizontalArticleViewHolder.create(parent, listener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType) {
+            ViewType.Read -> ReadArticleViewHolder.create(parent, listener)
+            ViewType.Unread -> HorizontalArticleViewHolder.create(parent, listener)
+            else -> HorizontalArticleViewHolder.create(parent, listener)
+        }
     }
 
-    override fun onBindViewHolder(holder: HorizontalArticleViewHolder, position: Int) {
-        val item = items[position]
-        holder.bind(item as ArticlesEntity)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder){
+            is HorizontalArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
+            is ReadArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
+        }
     }
 
     override fun getItemCount(): Int {
         return items.count()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return when (val item = items[position]){
+            is ArticlesEntity -> {
+                return when(item.is_read){
+                    true -> ViewType.Read
+                    false -> ViewType.Unread
+                }
+            }
+            else -> ViewType.Unread
+        }
+    }
+
     interface Listener {
         fun onClick(index: Int)
+    }
+
+    object ViewType{
+        const val Read = 1
+        const val Unread = 0
     }
 }

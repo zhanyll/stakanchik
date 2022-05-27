@@ -2,21 +2,25 @@ package com.example.stakanchik.ui.favourite
 
 import android.content.Context
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stakanchik.R
 import com.example.stakanchik.databinding.FragmentFavouriteArticlesBinding
 import com.example.stakanchik.ui.OnClicked
 import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseFragment
 import com.example.stakanchik.ui.base.Event
+import com.example.stakanchik.ui.main.MainFragment
 import com.example.stakanchik.ui.main.rv.ArticleAdapter
+import com.example.stakanchik.ui.popular.PopularArticlesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavouriteArticlesFragment: BaseFragment<FavouriteArticlesViewModel, FragmentFavouriteArticlesBinding>(
-    FavouriteArticlesViewModel::class.java
+    FavouriteArticlesViewModel::class.java,
     { FragmentFavouriteArticlesBinding.inflate(it) }
 ), ArticleAdapter.Listener {
 
@@ -33,6 +37,12 @@ class FavouriteArticlesFragment: BaseFragment<FavouriteArticlesViewModel, Fragme
         setupViews()
         subscribeToLiveData()
         vm.getFavouriteArticles()
+//        binding.bottomNav.selectedItemId = R.id.menu_starred
+//        binding.run{
+//            bottomNav.setOnItemSelectedListener {
+//                onItemSelected(it)
+//            }
+//        }
     }
 
     private fun setupViews() {
@@ -60,6 +70,26 @@ class FavouriteArticlesFragment: BaseFragment<FavouriteArticlesViewModel, Fragme
             }
         }
     }
+
+//    private fun onItemSelected(it: MenuItem) = when (it.itemId) {
+//        R.id.menu_home -> {
+//            fragmentListener.onClickOpenFragment(MainFragment())
+//            true
+//        }
+//        R.id.menu_popular -> {
+//            fragmentListener.onClickOpenFragment(PopularArticlesFragment())
+//            true
+//        }
+//        R.id.menu_starred -> {
+//            fragmentListener.onClickOpenFragment(FavouriteArticlesFragment())
+//            true
+//        }
+//        R.id.menu_user -> {
+//            //
+//            true
+//        }
+//        else -> false
+//    }
 
     override fun onClick(index: Int) {
         vm.article.value?.get(index)?.let {

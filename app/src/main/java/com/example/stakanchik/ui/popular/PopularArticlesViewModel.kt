@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.stakanchik.R
 import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.domain.useCase.GetArticleUseCase
+import com.example.stakanchik.domain.useCase.GetPopularArticlesUseCase
 import com.example.stakanchik.ui.base.BaseEvent
 import com.example.stakanchik.ui.base.BaseViewModel
 import com.example.stakanchik.ui.base.Event
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PopularArticlesViewModel @Inject constructor(
-    private val getArticleUseCase: GetArticleUseCase
+    private val getPopularArticlesUseCase: GetPopularArticlesUseCase
 ): BaseViewModel() {
 
     private val _article = MutableLiveData<List<ArticlesEntity>>()
@@ -28,7 +29,7 @@ class PopularArticlesViewModel @Inject constructor(
 
     fun getArticle() {
         disposable.add(
-            getArticleUseCase()
+            getPopularArticlesUseCase()
                 .subscribe({ item ->
                     Log.d("Article Success", item.toString())
                     try {
@@ -48,7 +49,7 @@ class PopularArticlesViewModel @Inject constructor(
     fun loadArticles() {
         _event.value = Event.ShowLoading
         disposable.add(
-            getArticleUseCase()
+            getPopularArticlesUseCase()
                 .doOnTerminate { _event.value = Event.StopLoading }
                 .subscribe({
 //                           it.sortedByDescending { it.views }

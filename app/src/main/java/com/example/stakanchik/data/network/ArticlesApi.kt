@@ -9,14 +9,14 @@ interface ArticlesApi {
     @GET("articles")
     fun getArticles(): Single<List<ArticlesDto>>
 
-    @GET("article")
+    @GET("articles?where=is_marked=true")
     fun getFavouriteArticles(
-        @Query("is_marked") is_marked: Boolean
+//        @Query("is_marked") is_marked: Boolean
     ): Single<List<ArticlesDto>>
 
-    @GET("article")
+    @GET("articles?sortBy=%60views%60%20desc")
     fun getPopularArticles(
-        @Query("views") views: Int
+//        @Query("views") views: Int
     ): Single<List<ArticlesDto>>
 
     @GET("articles")

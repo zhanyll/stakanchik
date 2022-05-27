@@ -1,8 +1,10 @@
 package com.example.stakanchik.ui.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import com.example.stakanchik.R
 import com.example.stakanchik.databinding.ActivityMainBinding
@@ -10,7 +12,6 @@ import com.example.stakanchik.ui.OnClicked
 import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseActivity
 import com.example.stakanchik.ui.favourite.FavouriteArticlesFragment
-import com.example.stakanchik.ui.favourite.FavouriteArticlesViewModel
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,9 +46,14 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
             .commit()
     }
 
+//    override fun onClickOpenArticle(activity: Activity, addToBackStack: Boolean?) {
+//        val intent = Intent()
+//        startActivity(intent)
+//    }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        intent?.getStringExtra("CHARACTER_ID")?.let {
+        intent?.getStringExtra(String::class.java.canonicalName)?.let {
             onClickOpenFragment(ArticleDetailsFragment.newInstance(it))
         }
     }
