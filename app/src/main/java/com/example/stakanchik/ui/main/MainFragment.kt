@@ -66,26 +66,6 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
         }
     }
 
-//    private fun onItemSelected(it: MenuItem) = when (it.itemId) {
-//        R.id.menu_home -> {
-//            fragmentListener.onClickOpenFragment(MainFragment())
-//            true
-//        }
-//        R.id.menu_popular -> {
-//            fragmentListener.onClickOpenFragment(PopularArticlesFragment())
-//            true
-//        }
-//        R.id.menu_starred -> {
-//            fragmentListener.onClickOpenFragment(FavouriteArticlesFragment())
-//            true
-//        }
-//        R.id.menu_user -> {
-//            //
-//            true
-//        }
-//        else -> false
-//    }
-
     override fun onClick(index: Int) {
         vm.article.value?.get(index)?.let {
             fragmentListener.onClickOpenFragment(ArticleDetailsFragment.newInstance(it.objectId))

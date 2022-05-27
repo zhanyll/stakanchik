@@ -38,12 +38,6 @@ class PopularArticlesFragment: BaseFragment<PopularArticlesViewModel, FragmentPo
         setupViews()
         subscribeToLiveData()
         vm.getArticle()
-//        binding.bottomNav.selectedItemId = R.id.menu_popular
-//        binding.run{
-//            bottomNav.setOnItemSelectedListener {
-//                onItemSelected(it)
-//            }
-//        }
     }
 
     private fun setupViews() {
@@ -71,26 +65,6 @@ class PopularArticlesFragment: BaseFragment<PopularArticlesViewModel, FragmentPo
             }
         }
     }
-//
-//    private fun onItemSelected(it: MenuItem) = when (it.itemId) {
-//        R.id.menu_home -> {
-//            fragmentListener.onClickOpenFragment(MainFragment())
-//            true
-//        }
-//        R.id.menu_popular -> {
-//            fragmentListener.onClickOpenFragment(PopularArticlesFragment())
-//            true
-//        }
-//        R.id.menu_starred -> {
-//            fragmentListener.onClickOpenFragment(FavouriteArticlesFragment())
-//            true
-//        }
-//        R.id.menu_user -> {
-//            //
-//            true
-//        }
-//        else -> false
-//    }
 
     override fun onClick(index: Int) {
         vm.article.value?.get(index)?.let {

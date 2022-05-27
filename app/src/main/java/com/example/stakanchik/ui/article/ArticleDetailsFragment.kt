@@ -19,12 +19,6 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
     { FragmentArticleDetailsBinding.inflate(it) }
 ) {
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        val mainActivity = context as MainActivity
-        mainActivity.visibilityOfBottom(8)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         parseArguments()

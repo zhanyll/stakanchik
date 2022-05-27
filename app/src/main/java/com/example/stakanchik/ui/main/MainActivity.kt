@@ -55,11 +55,6 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
             .commit()
     }
 
-//    override fun onClickOpenArticle(activity: Activity, addToBackStack: Boolean?) {
-//        val intent = Intent()
-//        startActivity(intent)
-//    }
-
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.getStringExtra(String::class.java.canonicalName)?.let {
