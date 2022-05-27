@@ -1,12 +1,11 @@
-package com.example.stakanchik.ui.popular
+package com.example.stakanchik.ui.read
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.stakanchik.R
 import com.example.stakanchik.data.models.ArticlesEntity
-import com.example.stakanchik.domain.useCase.GetArticleUseCase
-import com.example.stakanchik.domain.useCase.GetPopularArticlesUseCase
+import com.example.stakanchik.domain.useCase.GetReadArticlesUseCase
 import com.example.stakanchik.ui.base.BaseEvent
 import com.example.stakanchik.ui.base.BaseViewModel
 import com.example.stakanchik.ui.base.Event
@@ -15,8 +14,8 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
-class PopularArticlesViewModel @Inject constructor(
-    private val getPopularArticlesUseCase: GetPopularArticlesUseCase
+class ReadArticlesViewModel @Inject constructor(
+    private val getReadArticlesUseCase: GetReadArticlesUseCase
 ): BaseViewModel() {
 
     private val _article = MutableLiveData<List<ArticlesEntity>>()
@@ -29,8 +28,9 @@ class PopularArticlesViewModel @Inject constructor(
 
     fun getArticle() {
         disposable.add(
-            getPopularArticlesUseCase()
+            getReadArticlesUseCase()
                 .subscribe({ item ->
+                    Log.d("Article Success", "success")
                     try {
                         _article.postValue(item)
                         _article.value  = item
@@ -46,10 +46,9 @@ class PopularArticlesViewModel @Inject constructor(
     fun loadArticles() {
         _event.value = Event.ShowLoading
         disposable.add(
-            getPopularArticlesUseCase()
+            getReadArticlesUseCase()
                 .doOnTerminate { _event.value = Event.StopLoading }
                 .subscribe({
-
                 }, {
                     handleError(it)
                 })

@@ -13,6 +13,7 @@ import com.example.stakanchik.ui.base.BaseActivity
 import com.example.stakanchik.ui.favourite.FavouriteArticlesFragment
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
 import com.example.stakanchik.ui.profile.ProfileFragment
+import com.example.stakanchik.ui.read.ReadArticlesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,15 +33,10 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
             bottomNav.setOnItemSelectedListener {
                 onItemSelected(it)
             }
-        }
-    }
 
-    fun visibilityOfBottom(is_visible: Int){
-        if (is_visible == 0) {
-            visibilityOfBottom(View.VISIBLE)
-        }
-        else if (is_visible == 8) {
-            visibilityOfBottom(View.GONE)
+            toolbarRead.setOnClickListener {
+                onClickOpenFragment(ReadArticlesFragment())
+            }
         }
     }
 

@@ -19,6 +19,9 @@ interface ArticlesApi {
 //        @Query("views") views: Int
     ): Single<List<ArticlesDto>>
 
+    @GET("articles?where=is_read=true")
+    fun getReadArticles(): Single<List<ArticlesDto>>
+
     @GET("articles")
     fun getArticleByIdFromApi(
         @Query("objectId") objectId: String
