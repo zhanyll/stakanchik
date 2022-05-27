@@ -16,6 +16,7 @@ class HorizontalArticleViewHolder(
         binding.run {
             Glide.with(itemView.context).load(item.image).into(articleImage)
             articleTitle.text = item.topic
+            articleViewsCount.text = item.views.toString()
         }
     }
 
