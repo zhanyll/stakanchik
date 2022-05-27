@@ -38,12 +38,6 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
         setupViews()
         subscribeToLiveData()
         vm.getArticle()
-//        binding.bottomNav.selectedItemId = R.id.menu_home
-//        binding.run{
-//            bottomNav.setOnItemSelectedListener {
-//                onItemSelected(it)
-//            }
-//        }
     }
 
     private fun setupViews() {

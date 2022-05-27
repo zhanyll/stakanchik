@@ -62,17 +62,6 @@ class MainArticlesViewModel @Inject constructor(
         )
     }
 
-//    fun getArticleById(objectId: String) {
-//        disposable.add(
-//            getArticleByIdUseCase(objectId)
-//                .subscribe({
-//
-//                }, {
-//
-//                })
-//        )
-//    }
-
     fun loadArticles() {
         _event.value = Event.ShowLoading
         disposable.add(

@@ -1,13 +1,16 @@
 package com.example.stakanchik.ui.article
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import com.bumptech.glide.Glide
+import com.example.stakanchik.R
 import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.databinding.FragmentArticleDetailsBinding
 import com.example.stakanchik.ui.base.BaseFragment
+import com.example.stakanchik.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +18,12 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
     ArticleDetailsViewModel::class.java,
     { FragmentArticleDetailsBinding.inflate(it) }
 ) {
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val mainActivity = context as MainActivity
+        mainActivity.visibilityOfBottom(8)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

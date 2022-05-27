@@ -6,4 +6,8 @@
     <string name="profile">Profile</string>
     <string name="no_internet">No Internet Connection!</string>
     <string name="unknown_error">Unknown Error!</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

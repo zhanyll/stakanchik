@@ -1,10 +1,9 @@
 package com.example.stakanchik.ui.main
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.core.view.isEmpty
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.stakanchik.R
 import com.example.stakanchik.databinding.ActivityMainBinding
@@ -13,6 +12,7 @@ import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseActivity
 import com.example.stakanchik.ui.favourite.FavouriteArticlesFragment
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
+import com.example.stakanchik.ui.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +32,15 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
             bottomNav.setOnItemSelectedListener {
                 onItemSelected(it)
             }
+        }
+    }
+
+    fun visibilityOfBottom(is_visible: Int){
+        if (is_visible == 0) {
+            visibilityOfBottom(View.VISIBLE)
+        }
+        else if (is_visible == 8) {
+            visibilityOfBottom(View.GONE)
         }
     }
 
@@ -72,7 +81,7 @@ class MainActivity: BaseActivity<MainViewModel, ActivityMainBinding>(
             true
         }
         R.id.menu_user -> {
-            //
+            onClickOpenFragment(ProfileFragment())
             true
         }
         else -> false
