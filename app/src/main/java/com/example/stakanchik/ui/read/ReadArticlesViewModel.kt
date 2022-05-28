@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.stakanchik.R
 import com.example.stakanchik.data.models.ArticlesEntity
+import com.example.stakanchik.domain.models.Article
 import com.example.stakanchik.domain.useCase.GetReadArticlesUseCase
 import com.example.stakanchik.ui.base.BaseEvent
 import com.example.stakanchik.ui.base.BaseViewModel
@@ -18,8 +19,8 @@ class ReadArticlesViewModel @Inject constructor(
     private val getReadArticlesUseCase: GetReadArticlesUseCase
 ): BaseViewModel() {
 
-    private val _article = MutableLiveData<List<ArticlesEntity>>()
-    val article: LiveData<List<ArticlesEntity>>
+    private val _article = MutableLiveData<List<Article>>()
+    val article: LiveData<List<Article>>
         get() = _article
 
     init {
@@ -32,7 +33,6 @@ class ReadArticlesViewModel @Inject constructor(
                 .subscribe({ item ->
                     Log.d("Article Success", "success")
                     try {
-                        _article.postValue(item)
                         _article.value  = item
                     }catch (e: Throwable){
                         val a = e

@@ -2,8 +2,7 @@ package com.example.stakanchik.ui.main.rv
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stakanchik.data.models.ArticlesEntity
-import com.example.stakanchik.ui.base.BaseEvent
+import com.example.stakanchik.domain.models.Article
 
 class ArticleAdapter(
     private val listener: Listener
@@ -14,8 +13,8 @@ class ArticleAdapter(
     fun setNewItems(list: List<Any>){
         this.items.clear()
         this.items.addAll(list)
-        notifyDataSetChanged()
-//        notifyItemChanged(itemCount)
+//        notifyDataSetChanged()
+        notifyItemChanged(itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -28,8 +27,8 @@ class ArticleAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is HorizontalArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
-            is ReadArticleViewHolder -> holder.bind(items[position] as ArticlesEntity)
+            is HorizontalArticleViewHolder -> holder.bind(items[position] as Article)
+            is ReadArticleViewHolder -> holder.bind(items[position] as Article)
         }
     }
 
@@ -39,7 +38,7 @@ class ArticleAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (val item = items[position]){
-            is ArticlesEntity -> {
+            is Article -> {
                 return when(item.is_read){
                     true -> ViewType.Read
                     false -> ViewType.Unread

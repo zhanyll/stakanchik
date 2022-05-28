@@ -17,16 +17,7 @@ class ArticlesRepo @Inject constructor(
 
     fun getPopularArticlesFromApi() = articlesApi.getPopularArticles()
 
-//    fun updateDataApi(
-//        objectId: String,
-//        views: Int,
-//        is_marked: Boolean,
-//        is_read: Boolean
-//        ) = articlesApi.updateData(objectId, views, is_marked, is_read)
-
     fun saveArticlesToDataBase(articles: List<ArticlesEntity>) = articlesDao.insertArticles(articles)
-
-    fun getArticlesAsLive() = articlesDao.getAll()
 
     fun getReadArticles() = articlesApi.getReadArticles()
 
@@ -34,4 +25,6 @@ class ArticlesRepo @Inject constructor(
         return articlesDao.getArticleByID(objectId)
             .subscribeOn(Schedulers.io())
     }
+
+    fun updateViewsIsReadData(articlesEntity: ArticlesEntity) = articlesDao.updateViewsIsReadData(articlesEntity)
 }

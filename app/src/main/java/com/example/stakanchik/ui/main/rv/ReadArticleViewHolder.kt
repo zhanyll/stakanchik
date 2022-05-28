@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.stakanchik.R
-import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.databinding.ReadHorizontalItemArticleRecyclerviewBinding
+import com.example.stakanchik.domain.models.Article
 
 class ReadArticleViewHolder(
     private val binding: ReadHorizontalItemArticleRecyclerviewBinding
 ): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: ArticlesEntity) {
+    fun bind(item: Article) {
         binding.run {
             Glide.with(itemView.context).load(item.image).into(articleImage)
             articleTitle.text = item.topic

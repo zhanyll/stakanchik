@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,13 +18,14 @@ import com.example.stakanchik.ui.base.Event
 import com.example.stakanchik.ui.favourite.FavouriteArticlesFragment
 import com.example.stakanchik.ui.main.rv.ArticleAdapter
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
     MainArticlesViewModel::class.java,
     { FragmentMainBinding.inflate(it) }
-), ArticleAdapter.Listener, OnClicked {
+), ArticleAdapter.Listener {
 
     private lateinit var fragmentListener: OnClicked
     private val articleAdapter: ArticleAdapter = ArticleAdapter(this)
@@ -35,9 +37,18 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showBar()
         setupViews()
         subscribeToLiveData()
         vm.getArticle()
+    }
+
+    private fun showBar() {
+        val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        menu.visibility = View.VISIBLE
+
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+        toolbar.visibility = View.VISIBLE
     }
 
     private fun setupViews() {

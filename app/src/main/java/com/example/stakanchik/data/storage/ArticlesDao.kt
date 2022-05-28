@@ -20,4 +20,7 @@ interface ArticlesDao {
 
     @Query("SELECT * FROM ArticlesEntity WHERE is_marked = 'true'")
     fun getFavouriteArticles(): LiveData<List<ArticlesEntity>>
+
+    @Update
+    fun updateViewsIsReadData(articlesEntity: ArticlesEntity)
 }

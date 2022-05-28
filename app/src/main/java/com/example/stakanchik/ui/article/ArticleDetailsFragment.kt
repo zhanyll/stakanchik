@@ -1,25 +1,18 @@
 package com.example.stakanchik.ui.article
 
-import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import androidx.core.widget.NestedScrollView
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.example.stakanchik.R
-import com.example.stakanchik.data.models.ArticlesDto
 import com.example.stakanchik.data.models.ArticlesEntity
 import com.example.stakanchik.databinding.FragmentArticleDetailsBinding
+import com.example.stakanchik.domain.models.Article
+import com.example.stakanchik.extentions.toArticleEntity
+import com.example.stakanchik.extentions.toArticlesDto
 import com.example.stakanchik.ui.base.BaseFragment
-import com.example.stakanchik.ui.main.MainActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.internal.builders.ServiceComponentBuilder
-import dagger.hilt.android.internal.managers.ServiceComponentManager
 
 @AndroidEntryPoint
 class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArticleDetailsBinding> (
@@ -31,6 +24,15 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
         super.onViewCreated(view, savedInstanceState)
         parseArguments()
         subscribeToLiveData()
+        hideBar()
+    }
+
+    private fun hideBar() {
+        val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        menu.visibility = View.GONE
+
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+        toolbar.visibility = View.GONE
     }
 
     private fun parseArguments() {
@@ -45,7 +47,7 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
         }
     }
 
-    private fun setUpFragmentViews(article: ArticlesEntity) {
+    private fun setUpFragmentViews(article: Article) {
         binding.run {
             articleTitle.text = article.topic
             articleText.text = article.text
@@ -54,7 +56,10 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
             view?.let { Glide.with(it).load(article.image).into(articleImage) }
 
             markButton.setOnClickListener {
-                article.is_marked = true
+                article.is_read = true
+                article.views += 1
+                vm.updateArticleViewsAndIsRead(article.toArticlesDto())
+                vm.updateDaoData(article.toArticleEntity())
             }
         }
     }

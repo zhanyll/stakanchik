@@ -3,12 +3,8 @@ package com.example.stakanchik.ui.main
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.stakanchik.R
-import com.example.stakanchik.data.models.ArticlesEntity
-import com.example.stakanchik.data.repo.ArticlesRepo
-import com.example.stakanchik.domain.useCase.GetArticleByIdUseCase
-import com.example.stakanchik.domain.useCase.GetArticlesAsLiveDataUseCase
+import com.example.stakanchik.domain.models.Article
 import com.example.stakanchik.domain.useCase.GetArticleUseCase
 import com.example.stakanchik.ui.base.BaseEvent
 import com.example.stakanchik.ui.base.BaseViewModel
@@ -19,26 +15,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainArticlesViewModel @Inject constructor(
-    private val getArticleUseCase: GetArticleUseCase,
-    private val getArticlesAsLiveDataUseCase: GetArticlesAsLiveDataUseCase,
-    private val getArticleByIdUseCase: GetArticleByIdUseCase,
+    private val getArticleUseCase: GetArticleUseCase
 ): BaseViewModel() {
 
-    private val _article = MutableLiveData<List<ArticlesEntity>>()
-    val article: LiveData<List<ArticlesEntity>>
+    private val _article = MutableLiveData<List<Article>>()
+    val article: LiveData<List<Article>>
     get() = _article
-
-
-
-    val articlesLiveData: LiveData<List<Any>> =
-        Transformations.map(getArticlesAsLiveDataUseCase()){
-            val newList = mutableListOf<Any>()
-
-            it.forEachIndexed { index, articleEntity ->
-                newList.add(articleEntity)
-            }
-            return@map newList
-        }
 
     init {
         loadArticles()
@@ -53,11 +35,10 @@ class MainArticlesViewModel @Inject constructor(
                         _article.postValue(it)
                         _article.value  = it
                     }catch (e: Throwable){
-                        val a = e
+                        Log.d("error", "$e")
                     }
                 }, {
-                    Log.d("Article Error", it.toString())
-                    _event.value = BaseEvent.ShowToast(it.message ?: "")
+                    _event.value = BaseEvent.ShowToast(it.message ?: "unknown error")
                 })
         )
     }
@@ -67,17 +48,9 @@ class MainArticlesViewModel @Inject constructor(
         disposable.add(
             getArticleUseCase()
                 .doOnTerminate { _event.value = Event.StopLoading }
-                .subscribe({
-
-                }, {
-                    handleError(it)
-                })
+                .subscribe({}, { handleError(it) })
         )
     }
-
-//    fun getArticleByIndex(index: Int): ArticlesEntity {
-//        return articlesLiveData.value?.get(index) as ArticlesEntity
-//    }
 
     private fun handleError(it: Throwable) {
         _event.value = when (it) {

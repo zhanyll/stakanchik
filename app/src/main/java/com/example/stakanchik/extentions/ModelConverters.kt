@@ -34,3 +34,48 @@ fun ArticlesDto.toArticle(): Article {
         views
     )
 }
+
+fun Article.toArticlesDto(): ArticlesDto {
+    return ArticlesDto(
+        objectId,
+        topic,
+        text,
+        publish_date,
+        author,
+        genre,
+        is_marked,
+        is_read,
+        image,
+        views
+    )
+}
+
+fun ArticlesEntity.toArticle(): Article {
+    return Article(
+        objectId,
+        topic,
+        text,
+        publish_date,
+        author,
+        genre,
+        is_marked,
+        is_read,
+        image,
+        views
+    )
+}
+
+fun Article.toArticleEntity(): ArticlesEntity {
+    return ArticlesEntity(
+        objectId,
+        topic,
+        text,
+        publish_date,
+        author,
+        genre,
+        is_marked,
+        is_read,
+        image,
+        views
+    )
+}

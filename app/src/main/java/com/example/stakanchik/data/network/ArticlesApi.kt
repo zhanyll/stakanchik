@@ -1,8 +1,8 @@
 package com.example.stakanchik.data.network
 
 import com.example.stakanchik.data.models.ArticlesDto
+import io.reactivex.Observable
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.*
 
 interface ArticlesApi {
@@ -20,12 +20,9 @@ interface ArticlesApi {
     @GET("articles?where=is_read=true")
     fun getReadArticles(): Single<List<ArticlesDto>>
 
-//
-//    @PUT("articles/{objectId}")
-//    fun updateData(
-//        @Path("objectId") objectId: String,
-//        @Field("views") views: Int,
-//        @Field("is_marked") is_marked: Boolean,
-//        @Field("is_read") is_read: Boolean
-//    ): Single<List<ArticlesDto>>
+//    @POST("articles")
+//    fun updateViewsAndIsRead(@Body article: ArticlesDto): Observable<ArticlesDto>
+
+    @PUT("articles/{objectId}")
+    fun updateViewsAndIsRead(@Body articlesDto: ArticlesDto): Single<ArticlesDto>
 }

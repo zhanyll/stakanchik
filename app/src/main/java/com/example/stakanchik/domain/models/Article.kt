@@ -7,8 +7,8 @@ data class Article(
     val publish_date: String,
     val author: String,
     val genre: String, ///need to fix
-    val is_marked: Boolean,
-    val is_read: Boolean,
+    var is_marked: Boolean,
+    var is_read: Boolean,
     val image: String,
-    val views: Int
+    var views: Int
 )

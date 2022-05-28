@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.example.stakanchik.ui.base.Event
 import com.example.stakanchik.ui.main.MainFragment
 import com.example.stakanchik.ui.main.rv.ArticleAdapter
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +39,7 @@ class FavouriteArticlesFragment: BaseFragment<FavouriteArticlesViewModel, Fragme
         setupViews()
         subscribeToLiveData()
         vm.getFavouriteArticles()
+        showBar()
     }
 
     private fun setupViews() {
@@ -63,6 +66,14 @@ class FavouriteArticlesFragment: BaseFragment<FavouriteArticlesViewModel, Fragme
                 is Event.StopLoading -> binding.swipeRefresh.isRefreshing = false
             }
         }
+    }
+
+    private fun showBar() {
+        val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        menu.visibility = View.VISIBLE
+
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+        toolbar.visibility = View.VISIBLE
     }
 
     override fun onClick(index: Int) {
