@@ -1,9 +1,12 @@
 package com.example.stakanchik.ui.article
 
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.stakanchik.data.models.ArticlesDto
 import com.example.stakanchik.data.models.ArticlesEntity
+import com.example.stakanchik.data.repo.ArticlesRepo
 import com.example.stakanchik.domain.models.Article
 import com.example.stakanchik.domain.useCase.GetArticleByIdUseCase
 import com.example.stakanchik.domain.useCase.GetArticleUseCase
@@ -14,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArticleDetailsViewModel @Inject constructor(
-    private val getArticleByIdUseCase: GetArticleByIdUseCase
+    private val getArticleByIdUseCase: GetArticleByIdUseCase,
+    private val repo: ArticlesRepo
 ): BaseViewModel() {
 
     private val _article = MutableLiveData<ArticlesEntity>()
