@@ -11,4 +11,7 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="app_name_rus">Стаканчик</string>
+    <string name="user_nickname">user_nickname</string>
+    <string name="email">email</string>
+    <string name="genre">genre</string>
 </resources>

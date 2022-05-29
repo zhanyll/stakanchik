@@ -6,10 +6,10 @@ import io.reactivex.Single
 import retrofit2.http.*
 
 interface ArticlesApi {
-    @GET("articles")
+    @GET("articles?sortBy=%60publish_date%60%20desc")
     fun getArticles(): Single<List<ArticlesDto>>
 
-    @GET("articles?where=is_marked=true")
+    @GET("articles?where=is_marked%20%3D%20true&sortBy=%60updated%60%20desc")
     fun getFavouriteArticles(
     ): Single<List<ArticlesDto>>
 
@@ -17,7 +17,7 @@ interface ArticlesApi {
     fun getPopularArticles(
     ): Single<List<ArticlesDto>>
 
-    @GET("articles?where=is_read=true")
+    @GET("articles?where=is_read%20%3D%20true&sortBy=%60updated%60%20desc")
     fun getReadArticles(): Single<List<ArticlesDto>>
 
     @PUT("articles")

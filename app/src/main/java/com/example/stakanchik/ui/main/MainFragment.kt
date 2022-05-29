@@ -24,6 +24,7 @@ import com.example.stakanchik.ui.main.rv.ArticleAdapter
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.reflect.Array.get
 import java.util.concurrent.Executors
 
 @AndroidEntryPoint
@@ -34,6 +35,10 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
 
     private lateinit var fragmentListener: OnClicked
     private val articleAdapter: ArticleAdapter = ArticleAdapter(this)
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
+    private val lastVisibleItemPosition: Int
+        get() = linearLayoutManager.findLastVisibleItemPosition()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -59,10 +64,13 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
     private fun setupViews() {
         with(binding){
             recyclerView.adapter = articleAdapter
-            recyclerView.layoutManager = LinearLayoutManager(activity)
+            linearLayoutManager = LinearLayoutManager(activity)
+            recyclerView.layoutManager = linearLayoutManager
             swipeRefresh.setOnRefreshListener {
                 vm.loadArticles()
             }
+
+
 
             GridLayoutManager(activity, RecyclerView.VERTICAL)
                 .apply { recyclerView.layoutManager = this }

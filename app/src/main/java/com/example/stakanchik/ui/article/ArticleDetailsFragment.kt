@@ -55,6 +55,7 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
             articleTitle.text = article.topic
             articleText.text = article.text
             articleAuthor.text = article.author
+            articleGenre.text = article.genre
             articleViewsCount.text = article.views.toString()
             view?.let { Glide.with(it).load(article.image).into(articleImage) }
             if (article.is_marked) {

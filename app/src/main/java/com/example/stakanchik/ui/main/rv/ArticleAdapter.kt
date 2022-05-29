@@ -13,8 +13,8 @@ class ArticleAdapter(
     fun setNewItems(list: List<Any>){
         this.items.clear()
         this.items.addAll(list)
-//        notifyDataSetChanged()
-        notifyItemChanged(itemCount)
+        notifyDataSetChanged()
+//        notifyItemChanged(itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

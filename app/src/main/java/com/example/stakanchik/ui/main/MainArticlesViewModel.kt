@@ -34,7 +34,6 @@ class MainArticlesViewModel @Inject constructor(
         disposable.add(
             getArticleUseCase()
                 .subscribe({
-                    Log.d("Article Success", it.toString())
                     try {
                         _article.postValue(it)
                         _article.value  = it
