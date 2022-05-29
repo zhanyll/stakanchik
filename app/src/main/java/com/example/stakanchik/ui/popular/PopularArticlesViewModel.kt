@@ -1,10 +1,13 @@
 package com.example.stakanchik.ui.popular
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.stakanchik.R
+import com.example.stakanchik.data.models.ArticlesDto
 import com.example.stakanchik.data.models.ArticlesEntity
+import com.example.stakanchik.data.network.ArticlesApi
 import com.example.stakanchik.domain.models.Article
 import com.example.stakanchik.domain.useCase.GetArticleUseCase
 import com.example.stakanchik.domain.useCase.GetPopularArticlesUseCase
@@ -17,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PopularArticlesViewModel @Inject constructor(
-    private val getPopularArticlesUseCase: GetPopularArticlesUseCase
+    private val getPopularArticlesUseCase: GetPopularArticlesUseCase,
+    private val articlesApi: ArticlesApi
 ): BaseViewModel() {
 
     private val _article = MutableLiveData<List<Article>>()
@@ -55,6 +59,16 @@ class PopularArticlesViewModel @Inject constructor(
                     handleError(it)
                 })
         )
+    }
+
+    @SuppressLint("CheckResult")
+    fun updateArticleViewsAndIsRead(articlesDto: ArticlesDto) {
+        articlesApi.updateViewsAndIsRead(articlesDto)
+            .subscribe({
+                Log.d("update", "success")
+            }, {
+                Log.d("error", "could not set new values")
+            })
     }
 
     private fun handleError(it: Throwable) {

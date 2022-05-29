@@ -1,10 +1,13 @@
 package com.example.stakanchik.ui.read
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.stakanchik.R
+import com.example.stakanchik.data.models.ArticlesDto
 import com.example.stakanchik.data.models.ArticlesEntity
+import com.example.stakanchik.data.network.ArticlesApi
 import com.example.stakanchik.domain.models.Article
 import com.example.stakanchik.domain.useCase.GetReadArticlesUseCase
 import com.example.stakanchik.ui.base.BaseEvent
@@ -16,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReadArticlesViewModel @Inject constructor(
-    private val getReadArticlesUseCase: GetReadArticlesUseCase
+    private val getReadArticlesUseCase: GetReadArticlesUseCase,
+    private val articlesApi: ArticlesApi
 ): BaseViewModel() {
 
     private val _article = MutableLiveData<List<Article>>()
@@ -53,6 +57,16 @@ class ReadArticlesViewModel @Inject constructor(
                     handleError(it)
                 })
         )
+    }
+
+    @SuppressLint("CheckResult")
+    fun updateArticleViews(articlesDto: ArticlesDto) {
+        articlesApi.updateViewsAndIsRead(articlesDto)
+            .subscribe({
+                Log.d("update", "success")
+            }, {
+                Log.d("error", "could not set new values")
+            })
     }
 
     private fun handleError(it: Throwable) {

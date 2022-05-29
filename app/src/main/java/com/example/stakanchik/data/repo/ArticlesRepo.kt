@@ -25,6 +25,4 @@ class ArticlesRepo @Inject constructor(
         return articlesDao.getArticleByID(objectId)
             .subscribeOn(Schedulers.io())
     }
-
-    fun updateViewsIsReadData(articlesEntity: ArticlesEntity) = articlesDao.updateViewsIsReadData(articlesEntity)
 }

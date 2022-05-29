@@ -1,6 +1,8 @@
 package com.example.stakanchik.ui.article
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
@@ -13,6 +15,7 @@ import com.example.stakanchik.extentions.toArticlesDto
 import com.example.stakanchik.ui.base.BaseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.Executors
 
 @AndroidEntryPoint
 class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArticleDetailsBinding> (
@@ -54,12 +57,29 @@ class ArticleDetailsFragment: BaseFragment<ArticleDetailsViewModel, FragmentArti
             articleAuthor.text = article.author
             articleViewsCount.text = article.views.toString()
             view?.let { Glide.with(it).load(article.image).into(articleImage) }
+            if (article.is_marked) {
+                markButton.setBackgroundResource(R.drawable.unmarkedbutton)
+            } else {
+                markButton.setBackgroundResource(R.drawable.markedbutton)
+            }
 
             markButton.setOnClickListener {
-                article.is_read = true
-                article.views += 1
-                vm.updateArticleViewsAndIsRead(article.toArticlesDto())
-                vm.updateDaoData(article.toArticleEntity())
+                if (article.is_marked) {
+                    article.is_marked = false
+                    Executors.newSingleThreadExecutor().execute {
+                        vm.updateIsMarked(article.toArticlesDto())
+                        Handler(Looper.getMainLooper()).post {}
+                    }
+                    markButton.setBackgroundResource(R.drawable.markedbutton)
+
+                } else {
+                    article.is_marked = true
+                    Executors.newSingleThreadExecutor().execute {
+                        vm.updateIsMarked(article.toArticlesDto())
+                        Handler(Looper.getMainLooper()).post {}
+                    }
+                    markButton.setBackgroundResource(R.drawable.unmarkedbutton)
+                }
             }
         }
     }

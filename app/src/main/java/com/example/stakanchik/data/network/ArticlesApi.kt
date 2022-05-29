@@ -20,9 +20,9 @@ interface ArticlesApi {
     @GET("articles?where=is_read=true")
     fun getReadArticles(): Single<List<ArticlesDto>>
 
-//    @POST("articles")
-//    fun updateViewsAndIsRead(@Body article: ArticlesDto): Observable<ArticlesDto>
-
-    @PUT("articles/{objectId}")
+    @PUT("articles")
     fun updateViewsAndIsRead(@Body articlesDto: ArticlesDto): Single<ArticlesDto>
+
+    @PUT("articles")
+    fun updateIsMarked(@Body articlesDto: ArticlesDto): Single<ArticlesDto>
 }

@@ -14,9 +14,19 @@ import com.example.stakanchik.domain.useCase.GetArticleByIdUseCase
 import com.example.stakanchik.domain.useCase.GetArticleUseCase
 import com.example.stakanchik.ui.base.BaseEvent
 import com.example.stakanchik.ui.base.BaseViewModel
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import retrofit2.Retrofit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,17 +53,12 @@ class ArticleDetailsViewModel @Inject constructor(
     }
 
     @SuppressLint("CheckResult")
-    fun updateArticleViewsAndIsRead(articlesDto: ArticlesDto) {
-        articlesApi.updateViewsAndIsRead(articlesDto)
+    fun updateIsMarked(articlesDto: ArticlesDto) {
+        articlesApi.updateIsMarked(articlesDto)
             .subscribe({
-                it.is_read = true
-                it.views += 1
+                it.is_marked = true
             }, {
                 Log.d("error", "could not set new values")
             })
-    }
-
-    fun updateDaoData(articlesEntity: ArticlesEntity) {
-        repo.updateViewsIsReadData(articlesEntity)
     }
 }

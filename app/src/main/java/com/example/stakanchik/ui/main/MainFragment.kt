@@ -1,7 +1,10 @@
 package com.example.stakanchik.ui.main
 
 import android.content.Context
+import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stakanchik.R
 import com.example.stakanchik.databinding.FragmentMainBinding
+import com.example.stakanchik.extentions.toArticlesDto
 import com.example.stakanchik.ui.OnClicked
 import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseFragment
@@ -20,6 +24,7 @@ import com.example.stakanchik.ui.main.rv.ArticleAdapter
 import com.example.stakanchik.ui.popular.PopularArticlesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.Executors
 
 @AndroidEntryPoint
 class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
@@ -82,6 +87,10 @@ class MainFragment: BaseFragment<MainArticlesViewModel, FragmentMainBinding> (
             fragmentListener.onClickOpenFragment(ArticleDetailsFragment.newInstance(it.objectId))
             it.views += 1
             it.is_read = true
+            Executors.newSingleThreadExecutor().execute {
+                vm.updateArticleViewsAndIsRead(it.toArticlesDto())
+                Handler(Looper.getMainLooper()).post {}
+            }
         }
     }
 }

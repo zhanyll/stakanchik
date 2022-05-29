@@ -2,6 +2,8 @@ package com.example.stakanchik.ui.popular
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import android.widget.Adapter
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stakanchik.R
 import com.example.stakanchik.databinding.FragmentPopularArticlesBinding
+import com.example.stakanchik.extentions.toArticlesDto
 import com.example.stakanchik.ui.OnClicked
 import com.example.stakanchik.ui.article.ArticleDetailsFragment
 import com.example.stakanchik.ui.base.BaseFragment
@@ -20,6 +23,7 @@ import com.example.stakanchik.ui.main.MainFragment
 import com.example.stakanchik.ui.main.rv.ArticleAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.Executors
 
 @AndroidEntryPoint
 class PopularArticlesFragment: BaseFragment<PopularArticlesViewModel, FragmentPopularArticlesBinding>(
@@ -82,6 +86,10 @@ class PopularArticlesFragment: BaseFragment<PopularArticlesViewModel, FragmentPo
             fragmentListener.onClickOpenFragment(ArticleDetailsFragment.newInstance(it.objectId))
             it.views += 1
             it.is_read = true
+            Executors.newSingleThreadExecutor().execute {
+                vm.updateArticleViewsAndIsRead(it.toArticlesDto())
+                Handler(Looper.getMainLooper()).post {}
+            }
         }
     }
 }
